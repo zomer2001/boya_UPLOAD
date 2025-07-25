@@ -4,10 +4,6 @@ fastapi-amis-admin==0.5.0
 fastapi-user-auth==0.5.0
 fastapi-scheduler==0.0.12
 apscheduler==3.10.1
-SQLAlchemy==1.4.41
-aiosqlite==0.19.0
-aiomysql==0.2.0
-SQLModel==0.0.8
 pandas==2.0.3
 numpy==1.24.3
 modbus-tk==1.1.3
