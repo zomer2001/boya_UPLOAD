@@ -36,8 +36,8 @@ chunk_size = int(chunk_size_config)
 
 num_chunk = int(chunk_number_config)
 
-hostAdress1 = "192.168.0.127"
-hostAdress2 = "192.168.0.128"
+hostAdress1 = "192.168.1.201"
+hostAdress2 = "192.168.1.202"
 logger = modbus_tk.utils.create_logger("console")
 
 def ReadFloat2(*args, reverse=True):
@@ -139,28 +139,25 @@ def ModbusTcp_server2(hostAdress,portName,slaveAdress):
         result = tuple()
 
 
-        master_506 = modbus_tcp.TcpMaster(host=hostAdress, port=506)
-        master_507 = modbus_tcp.TcpMaster(host=hostAdress, port=507)
+        master_503 = modbus_tcp.TcpMaster(host=hostAdress, port=506)
         # master.set_timeout(50.0)
         logger.info("connected")
 
-        register_6 = [30000, 30026, 30052, 30078, 30110, 30142, 30174, 30206, 30238, 30270, 30302, 30334, 30366, 30398, 30430, 30462, 30494, 30526, 30558, 30590, 30622, 30654, 30686, 30718, 30750, 30782, 30814, 30846, 30878, 30910, 30942, 30974, 31006, 31038, 31070, 31102, 31134, 31166, 31198, 31230, 31262, 31294, 31326, 31358, 31390, 31422, 31454, 31486, 31518, 31550, 31582, 31614, 31646, 31678, 31710, 31742, 31768, 31794, 31820, 31852, 31884, 31916, 31948, 31980, 32012, 32044, 32076, 32108, 32140, 32172, 32204, 32236, 32268, 32300, 32332, 32364, 32396, 32428, 32460, 32492, 32524, 32556, 32588, 32620, 32652, 32684, 32716, 32748, 32780, 32806, 32832, 32858, 32884, 32916, 32948, 32980, 33012, 33044, 33076, 33108, 33140, 33172, 33204, 33236, 33268, 33300, 33332, 33364, 33396, 33428, 33460, 33492, 33524, 33556]
+        register_2 = [
+            40, 88, 136, 184, 232, 280, 328, 376, 424, 472,
+            520, 568, 616, 664, 712, 760, 808, 856, 904, 952,
+            1000, 1048, 1096, 1144, 1192, 1240, 1288, 1336, 1384, 1432,
+            1480, 1528, 1576, 1624, 1672, 1720, 1768, 1816, 1864, 1912
+        ]
+
         # 指令格式：机号 功能代码 起始地址 结束地址【读取寄存器数据】
-        for v in register_6:
-            data_506 = master_506.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, v, 2)
-        # data_502 = master_502.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, 30000, 116)
-            print("data_502=============", data_506)
-        data_503 = master_503.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, 30000, 60)
-        print("data_503=============", data_503)
-        data_504 = master_504.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, 30000, 106)
-        print("data_504=============", data_504)
-        data_505 = master_505.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, 30000, 54)
-        print("data_505=============", data_505)
-        for i in [data_502, data_503, data_504, data_505]:
-            result = result.__add__(i)
+        for v in register_2:
+            data0 = master_503.execute(slaveAdress, cst.READ_HOLDING_REGISTERS, v, 2)
+            result = result.__add__(data0)
+
     except modbus_tk.modbus.ModbusError as e:
         logger.error("%s- Code=%d" % (e, e.get_exception_code()))
-    print('result', result)
+
     return result
 
 
@@ -184,15 +181,21 @@ def ModbusTcp_server1(hostAdress,portName,slaveAdress):
         #     32162, 32194, 32226, 32258, 32290, 32322, 32354, 32386, 32418, 32450,
         #     32482, 32514]
         register_1 = [
-            30000, 30026, 30052, 30078, 30104, 30130, 30156, 30188, 30220, 30252,
-            30284, 30316, 30348, 30380, 30412, 30444, 30476, 30508, 30540, 30572,
-            30604, 30636, 30668, 30700, 30732, 30764, 30790, 30816, 30848, 30880,
-            30912, 30944, 30976, 31008, 31040, 31072, 31104, 31136, 31168, 31200,
-            31232, 31264, 31296, 31328, 31360, 31392, 31424, 31456, 31482, 31508,
-            31534, 31560, 31586, 31618, 31650, 31682, 31714, 31746, 31778, 31810,
-            31842, 31874, 31906, 31938, 31970, 32002, 32034, 32066, 32098, 32130,
-            32162, 32194, 32226, 32258, 32290, 32322, 32354, 32386, 32418, 32450,
-            32482, 32514, 32546, 32578, 32610, 32642, 32674]
+            40, 88, 136, 184, 232, 280, 328, 376, 424, 472,
+            520, 568, 616, 664, 712, 760, 808, 856, 904, 952,
+            1000, 1048, 1096, 1144, 1192, 1240, 1288, 1336, 1384, 1432,
+            1480, 1528, 1576, 1624, 1672, 1720, 1768, 1816, 1864, 1912,
+            1960, 2008, 2056, 2104, 2152, 2200, 2248, 2296, 2344, 2392,
+            2440, 2488, 2536, 2584, 2632, 2680, 2728, 2776, 2824, 2872,
+            2920, 2968, 3016, 3064, 3112, 3160, 3208, 3256, 3304, 3352,
+            3400, 3448, 3496, 3544, 3592, 3640, 3688, 3736, 3784, 3832,
+            3880, 3928, 3976, 4024, 4072, 4120, 4168, 4216, 4264, 4312,
+            4360, 4408, 4456, 4504, 4552, 4600, 4648, 4696, 4744, 4792,
+            4840, 4888, 4936, 4984, 5032, 5080, 5128, 5176, 5224, 5272,
+            5320, 5368, 5416, 5464, 5512, 5560, 5608, 5656, 5704, 5752,
+            5800, 5848, 5896, 5944, 5992, 6040, 6088, 6136, 6184, 6232,
+            6280, 6328
+        ]
 
         #指令格式：机号 功能代码 起始地址 结束地址【读取寄存器数据】
         for v in register_1:
@@ -207,13 +210,13 @@ def ModbusTcp_server1(hostAdress,portName,slaveAdress):
 
 def get_modbus_tcp_data(hostAdress):
     # 端口号码
-    portName = 502
+    portName = 503
     # 从站的站号
     slaveAdress = 1
     k_V_2 = {}
     k_V_1 = {}
     KV = {}
-    if hostAdress=="192.168.0.127":
+    if hostAdress=="192.168.1.201":
 
         data_1 = ModbusTcp_server1(hostAdress, portName, slaveAdress)
         #print(data_1)
@@ -224,7 +227,7 @@ def get_modbus_tcp_data(hostAdress):
             k_V_1[i] = round(s * 0.01, 2)
             print(s)
 
-    elif hostAdress=="192.168.0.128":
+    elif hostAdress=="192.168.1.202":
 
         data_2 = ModbusTcp_server2(hostAdress, portName, slaveAdress)
 
