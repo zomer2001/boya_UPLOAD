@@ -1,0 +1,8 @@
+2024-11-04 11:31:04.377 | INFO     | tools.Create_xml:execept_print:60 - 接口异常，调用失败
+2024-11-04 11:31:07.379 | INFO     | __main__:get_data_from_modbustcp:117 - 数据导出: modbus_tcp, 耗时: 3.319637 秒
+2024-11-04 11:51:33.959 | INFO     | tools.Create_xml:execept_print:60 - 接口异常，调用失败
+2024-11-04 11:51:36.960 | INFO     | __main__:get_data_from_modbustcp:117 - 数据导出: modbus_tcp, 耗时: 3.106823 秒
+2024-11-04 14:11:34.404 | INFO     | tools.Create_xml:execept_print:60 - 接口异常，调用失败
+2024-11-04 14:11:37.422 | INFO     | __main__:get_data_from_modbustcp:117 - 数据导出: modbus_tcp, 耗时: 3.231788 秒
+2024-11-04 14:23:54.272 | INFO     | tools.Create_xml:execept_print:60 - 接口异常，调用失败
+2024-11-04 14:23:57.273 | INFO     | __main__:get_data_from_modbustcp:117 - 数据导出: modbus_tcp, 耗时: 3.176142 秒
